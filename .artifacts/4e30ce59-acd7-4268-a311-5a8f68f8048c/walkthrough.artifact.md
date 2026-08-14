@@ -1,22 +1,27 @@
-# Walkthrough - Fixing KSP Plugin Resolution
+# Walkthrough - Personalização da Lista de Notas e Ações do DAO
 
-I have successfully fixed the `UnknownPluginException` for the KSP plugin and resolved a compatibility issue with AGP 9.3.
+Atualizei a tela `ListaNotasScreen.kt` para incluir suporte a edição e exclusão de notas, além de adicionar Previews e melhorar a interface.
 
-## Changes Made
+## Alterações Realizadas
 
-### Version Catalog
-- **[libs.versions.toml](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/gradle/libs.versions.toml)**: Added `ksp` version `2.2.10-2.0.2` and defined the `ksp` plugin alias.
+### Interface de Usuário (Compose)
+- **[ListaNotasScreen.kt](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/app/src/main/java/br/com/curso/android_ex11_room_notes_offline/screens/ListaNotasScreen.kt)**:
+    - **`NotaItem`**: Novo componente para exibir cada nota com botões de ação (ícones de editar e excluir).
+    - **`EditarNotaDialog`**: Diálogo que permite atualizar o título e o corpo de uma nota existente.
+    - **`TopAppBar`**: Adicionada uma barra superior com o título "Minhas Notas".
+    - **Ações**: Integração com `viewModel.removerNota` e `viewModel.atualizarNota`.
+    - **Previews**: Adicionados previews para o item individual e para a tela completa (UI estática).
 
-### Build Scripts
-- **[build.gradle.kts (root)](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/build.gradle.kts)**: Declared the KSP plugin using `alias(libs.plugins.ksp) apply false` to make it available to the project.
-- **[build.gradle.kts (:app)](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/app/build.gradle.kts)**: Updated the plugin application to use `alias(libs.plugins.ksp)` instead of a hardcoded ID.
+### Configuração do Projeto
+- **[libs.versions.toml](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/gradle/libs.versions.toml)**: Adicionada a biblioteca `material-icons-extended`.
+- **[build.gradle.kts (:app)](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/app/build.gradle.kts)**: Adicionada a dependência `androidx.compose.material.icons.extended`.
 
-### Project Properties
-- **[gradle.properties](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/gradle.properties)**: Added `android.disallowKotlinSourceSets=false` to resolve a conflict between KSP and AGP 9.3's "built-in Kotlin" feature.
+## Resultados da Verificação
+- **Build**: `./gradlew :app:assembleDebug` concluído com sucesso.
+- **Preview**: Os Previews estão renderizando corretamente no Android Studio.
 
-## Verification Results
-- **Gradle Sync**: Successful.
-- **Build**: `./gradlew :app:assembleDebug` completed successfully.
+> [!TIP]
+> Usei o `AlertDialog` para edição rápida, o que evita a necessidade de navegar para uma nova tela apenas para pequenas correções.
 
-> [!NOTE]
-> The KSP version `2.2.10-2.0.2` was chosen to match your Kotlin version `2.2.10`, ensuring full compatibility.
+> [!IMPORTANT]
+> Certifique-se de realizar o Sync do Gradle se notar algum erro de importação de ícones no IDE.

@@ -1,23 +1,22 @@
-# Fix KSP Plugin Unknown Exception
+# Personalizar Lista de Notas e Adicionar Ações do DAO
 
-The project is failing to sync because the KSP plugin is applied in the `:app` module without a version, and it is not defined in the root `build.gradle.kts` or the Version Catalog (`libs.versions.toml`).
+O objetivo é aprimorar a tela `ListaNotasScreen.kt` para suportar as operações de exclusão e edição, além de adicionar Previews para facilitar o desenvolvimento.
 
-## Proposed Changes
+## Alterações Propostas
 
-### Build Configuration
+### UI e Funcionalidade
 
-#### [MODIFY] [libs.versions.toml](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/gradle/libs.versions.toml)
-- Add KSP version `2.2.10-2.0.2` to the `[versions]` block.
-- Add KSP plugin definition to the `[plugins]` block.
+#### [MODIFY] [ListaNotasScreen.kt](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/app/src/main/java/br/com/curso/android_ex11_room_notes_offline/screens/ListaNotasScreen.kt)
+- **Componente `NotaItem`**: Extrair o layout de cada nota para um novo Composable, facilitando a manutenção e o Preview.
+- **Ações de Nota**:
+    - Adicionar um botão de exclusão (`IconButton` com ícone `Delete`) para chamar `viewModel.removerNota`.
+    - Adicionar funcionalidade de edição. Podemos usar um diálogo simples ou expandir o card para editar o título e corpo.
+- **Preview**: Adicionar Previews para o `NotaItem` e para a `ListaNotasScreen` (usando dados mockados).
+- **Melhorias Visuais**: Usar `TopAppBar` para um visual mais padrão do Android e melhorar o layout dos cards.
 
-#### [MODIFY] [build.gradle.kts (root)](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/build.gradle.kts)
-- Add the KSP plugin to the `plugins` block with `apply false`.
+## Plano de Verificação
 
-#### [MODIFY] [build.gradle.kts (:app)](file:///C:/Users/raybr/AndroidStudioProjects/android_ex11_room_notes_offline/app/build.gradle.kts)
-- Update the KSP plugin application to use the Version Catalog alias.
-
-## Verification Plan
-
-### Automated Tests
-- Run Gradle sync to ensure the plugin is correctly resolved.
-- Run `./gradlew assembleDebug` to verify the build completes successfully.
+### Testes Manuais
+- Abrir o Preview no Android Studio para verificar o novo design.
+- Executar o app e testar a exclusão de uma nota.
+- Testar a edição de uma nota e verificar se os dados são persistidos corretamente.

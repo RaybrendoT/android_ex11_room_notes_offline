@@ -1,4 +1,5 @@
-- `[x]` Update `libs.versions.toml` with KSP version and plugin
-- `[x]` Update root `build.gradle.kts` to declare KSP plugin
-- `[x]` Update `:app/build.gradle.kts` to apply KSP plugin via alias
-- `[x]` Sync and verify build (Fixing AGP 9.3 compatibility issue in `gradle.properties`)
+- `[x]` Criar componente `NotaItem` em `ListaNotasScreen.kt`
+- `[x]` Adicionar botão de exclusão com ação do ViewModel
+- `[x]` Adicionar botão de edição com diálogo de edição rápida
+- `[x]` Implementar Previews para `NotaItem` e `ListaNotasScreen`
+- `[x]` Atualizar layout principal da `ListaNotasScreen` para usar `TopAppBar`
