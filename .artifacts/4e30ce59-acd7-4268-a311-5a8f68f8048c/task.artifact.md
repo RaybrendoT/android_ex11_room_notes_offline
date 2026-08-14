@@ -1,0 +1,4 @@
+- `[x]` Update `libs.versions.toml` with KSP version and plugin
+- `[x]` Update root `build.gradle.kts` to declare KSP plugin
+- `[x]` Update `:app/build.gradle.kts` to apply KSP plugin via alias
+- `[x]` Sync and verify build (Fixing AGP 9.3 compatibility issue in `gradle.properties`)
